@@ -1,0 +1,45 @@
+<div *ngIf="isDataReady" class="modal-header">
+        <h4>Word Stats</h4>
+</div>
+<div *ngIf="isDataReady" class="modal-body">
+        <div class="container">
+                <div class="row">
+                        <div class="col-6">
+                                <h2>{{word.name}}</h2>
+                        </div>
+                        <div class="col-6">
+                                <h2>{{word.translation}}</h2>
+                        </div>
+                </div>
+                <div class="row">
+                        <h2>Lessons:</h2>
+                </div>
+                <div class="row">
+                        <table class="table table-hover mt-3">
+                                <thead>
+                                        <tr>
+                                        <th>#</th>
+                                        <th>Date</th>
+                                        <th>Result</th>
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                        <tr *ngFor="let lesson of word.lessons | orderBy: 'date'; let i = index">
+                                                <th scope="row">{{i+1}}</th>
+                                                <td>
+                                                        {{lesson.date}}
+                                                </td>
+                                                <td>
+                                                        {{lesson.result}}
+                                                </td>
+                                        </tr>
+                                </tbody>
+                        </table>
+                </div>
+        </div>
+</div>
+<div *ngIf="isDataReady" class="modal-footer">
+        <button class="btn btn-sm btn-outline-info" (click)="clickClose()">
+        Close
+        </button>
+</div>

@@ -1,0 +1,67 @@
+<div *ngIf="state === 'TestMode'" class="container">
+        <div class="row d-flex justify-content-center">
+                <h1>{{wordSet[i].name}}</h1>
+        </div>
+        <div class="row d-flex justify-content-center">
+                <h1>Translation:</h1>
+        </div>
+        <div class="row">
+                <div class="col-2"></div>
+                <div class="col-8">
+                        <form novalidate #formRef="ngForm">
+                                <div class="row">
+                                        <input [(ngModel)]="answer" #answerField="ngModel"
+                                        name="answerField"
+                                        type="text" class="form-control" id="name" autocomplete="off" required>
+                                </div>
+                                <div class="row d-flex justify-content-center">
+                                        <button class="btn btn-info" (click)="clickNext()"
+                                        [disabled]="formRef.invalid">
+                                Next
+                                        </button>
+                                </div>
+                        </form>
+                </div>
+                <div class="col-2"></div>
+        </div>
+</div>
+
+<div *ngIf="state === 'Results'" class="container">
+        <div class="row">
+                <div class="col-2"></div>
+                <div class="col-8">
+                       <table class="table table-hover mt-3">
+                                <thead>
+                                        <tr>
+                                        <th>#</th>
+                                        <th>Word</th>
+                                        <th>Answer</th>
+                                        <th>Translation</th>
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                        <tr *ngFor="let word of wordSet; let i = index"
+                                        class="{{isCorrect(word)}}"
+                                        >
+                                                <th scope="row">{{i+1}}</th>
+                                                <td>
+                                                        {{word.name}}
+                                                </td>
+                                                <td>
+                                                        {{word.answer}}
+                                                </td>
+                                                <td>
+                                                        {{word.translation}}
+                                                </td>
+                                        </tr>
+                                </tbody>
+                        </table> 
+                </div>
+                <div class="col-2"></div>
+        </div>
+        <div class="row d-flex justify-content-center">
+                <button class="btn btn-success" (click)="finish()">
+                Finish
+                </button>
+        </div> 
+</div>
